@@ -1,5 +1,6 @@
 # todo
 - [x] show current time
+- [x] add picture in picture mode
 - [ ] track event
   - [ ] title
   - [ ] description
