@@ -1,5 +1,5 @@
 # todo
-- [ ] show current time
+- [x] show current time
 - [ ] track event
   - [ ] title
   - [ ] description

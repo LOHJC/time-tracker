@@ -1,0 +1,31 @@
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* color refs: https://designpixie.com/blogs/creative-design-ideas/pastel-color-palettes-with-color-codes */
+/* should be opposite color */
+/* yellow/orange - purple/blue */
+/* red - green */
+
+#big-ui {
+    border-radius: 25px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* idle color*/
+    background-color: #f2ebcc;
+    /* background-color: #fcdce1;  */
+    /* background-color: #f7dde8; */
+    /* on going color */
+    /* background-color: #c8ceee; */
+    /* background-color: #cde3dc;  */
+    /* background-color: #cde5d9; */
+}
+
+#big-ui-time {
+    text-align: center;
+    font-size: 3em;
+    font-weight: bold;
+}
