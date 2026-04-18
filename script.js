@@ -103,12 +103,17 @@ function updateBigUI() {
     if (current_progress == Status.TRACKING) {
         active_document.getElementById("big-ui-task").hidden = true;
         active_document.getElementById("big-ui-current-task").hidden = false;
+        active_document.getElementById("big-ui-end-button").hidden = false;
+        
         current_task = active_document.getElementById("big-ui-task-title").value;
     }
     else if (current_progress == Status.IDLE) {
         active_document.getElementById("big-ui-task").hidden = false;
         active_document.getElementById("big-ui-current-task").hidden = true;
+        active_document.getElementById("big-ui-end-button").hidden = true;
+
         active_document.getElementById("big-ui-time-diff").innerText = "00:00:00";
+        current_task = "";
     }
     active_document.getElementById("big-ui-current-task").innerText = current_task;
 
@@ -141,8 +146,8 @@ active_document.getElementById("big-ui-end-button").addEventListener("click", (e
     if (current_progress == Status.TRACKING) {
         end_time = new Date();
         current_progress = Status.IDLE;
+        updateTaskDone(); // need to make sure task done before update ui
         updateBigUI();
-        updateTaskDone();
     }
 })
 
