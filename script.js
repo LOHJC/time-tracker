@@ -186,7 +186,7 @@ function updateTaskDone() {
 
     const commentString = current_comments.map(item => {
         const time = item.time.toLocaleTimeString();
-        return `${time} - ${item.comment}`; // "19:09:14 - something"
+        return `${time}\n${item.comment}\n`;
     }).join("\n");
     comments_col.textContent = commentString;
     time_diff_col.textContent = current_time_diff_string;

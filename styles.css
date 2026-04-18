@@ -55,13 +55,19 @@ body {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
-    text-align: center;
+    text-align: left;
     margin: 8px 0px;
     background-color: #c8ceee;
     overflow: hidden;
     border-radius: 10px;
     overflow-wrap: break-word;
     word-break: break-word;
+    white-space: pre-wrap;
+}
+
+#task-done-table th,
+td {
+    padding: 10px 3px;
 }
 
 button {
