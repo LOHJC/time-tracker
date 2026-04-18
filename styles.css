@@ -27,6 +27,9 @@ body {
     /* background-color: #c8ceee; */
     /* background-color: #cde3dc;  */
     /* background-color: #cde5d9; */
+
+    /* this is for the comment box to use as reference */
+    position: relative;
 }
 
 #big-ui-time {
@@ -64,6 +67,48 @@ button {
     margin: 3px;
     padding: 5px 10px;
     border-radius: 10px;
+    font-size: 0.8em;
+}
+
+#big-ui-task-title {
+    border-radius: 10px;
+    padding: 3px 10px;
+}
+
+#big-ui-comment-box {
+    position: absolute;
+    right: 3%;
+    z-index: 100;
+    padding: 10px;
+    /* center it vertically */
+    top: 50%;
+    transform: translate(0, -50%);
+
+    border-radius: 10px;
+    background-color: #fcdce1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#big-ui-comment-textarea {
+    border-radius: 8px;
+    min-width: 100px;
+    min-height: 80px;
+    resize: none;
+}
+
+#big-ui-tracking-elems {
+    /* depends on the button height */
+    min-height: 36px;
+    text-align: center;
+
+    /* use grid, set width, auto columns evenly */
+    display: grid;
+    min-width: 10%;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    align-items: center;
 }
 
 [hidden] {

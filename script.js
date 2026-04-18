@@ -104,16 +104,19 @@ function updateBigUI() {
         active_document.getElementById("big-ui-task").hidden = true;
         active_document.getElementById("big-ui-current-task").hidden = false;
         active_document.getElementById("big-ui-end-button").hidden = false;
-        
+        active_document.getElementById("big-ui-add-comment-button").hidden = false;
+
         current_task = active_document.getElementById("big-ui-task-title").value;
     }
     else if (current_progress == Status.IDLE) {
         active_document.getElementById("big-ui-task").hidden = false;
         active_document.getElementById("big-ui-current-task").hidden = true;
         active_document.getElementById("big-ui-end-button").hidden = true;
+        active_document.getElementById("big-ui-add-comment-button").hidden = true;
 
         active_document.getElementById("big-ui-time-diff").innerText = "00:00:00";
         current_task = "";
+        active_document.getElementById("big-ui-task-title").value = current_task;
     }
     active_document.getElementById("big-ui-current-task").innerText = current_task;
 
@@ -169,9 +172,7 @@ function updateTaskDone() {
 
 
     const commentString = current_comments.map(item => {
-        const time = item.time.toLocaleTimeString('en-GB', {
-            hour12: false
-        });
+        const time = item.time.toLocaleTimeString();
         return `${time} - ${item.comment}`; // "19:09:14 - something"
     }).join("\n");
     comments_col.textContent = commentString;
@@ -184,13 +185,22 @@ function updateTaskDone() {
 }
 
 // update comments
-function updateComments() {
+function updateComments(comment) {
     if (current_progress == Status.TRACKING) {
-        const now = new Date()
-        const time_string = now.toLocaleTimeString();
-        current_comments.push({ "time": now, "comment": "something" });
+        const now = new Date();
+        current_comments.push({ "time": now, "comment": comment });
     }
 }
-active_document.getElementById("big-ui-add-comment").addEventListener("click", (event) => {
-    updateComments()
+function showCommentUI() {
+    if (current_progress == Status.TRACKING) {
+        active_document.getElementById("big-ui-comment-box").hidden = false;
+    }
+}
+active_document.getElementById("big-ui-add-comment-button").addEventListener("click", (event) => {
+    showCommentUI();
+})
+active_document.getElementById("big-ui-done-comment-button").addEventListener("click", (event) => {
+    updateComments(active_document.getElementById("big-ui-comment-textarea").value);
+    active_document.getElementById("big-ui-comment-textarea").value = "";
+    active_document.getElementById("big-ui-comment-box").hidden = true;
 })
