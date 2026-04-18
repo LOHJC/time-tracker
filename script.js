@@ -77,7 +77,7 @@ async function openPip() {
     // pip back to document when close
     pip_window.addEventListener("pagehide", (event) => {
         active_document = document;
-        const container = active_document.body;
+        const container = active_document.getElementById("big-ui-container");
         const big_ui = event.target.querySelector("#big-ui");
         container.append(big_ui);
     });
