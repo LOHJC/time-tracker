@@ -1,1 +1,1 @@
-# track-your-time
+# time-tracker
