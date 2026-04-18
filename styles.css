@@ -7,6 +7,11 @@
 /* yellow/orange - purple/blue */
 /* red - green */
 
+body {
+    margin: auto;
+    max-width: 800px;
+}
+
 #big-ui {
     border-radius: 25px;
     min-height: 150px;
@@ -28,4 +33,27 @@
     text-align: center;
     font-size: 3em;
     font-weight: bold;
+}
+
+#task {
+    border-radius: 10px;
+    background-color:#c8ceee;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    all: unset;
+    cursor: pointer; 
+    background-color: #cde5d9;
+    margin: 3px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+input {
+    margin: 3px;
 }

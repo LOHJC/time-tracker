@@ -1,11 +1,12 @@
 # todo
 - [x] show current time
 - [x] add picture in picture mode
-- [ ] track event
-  - [ ] title
-  - [ ] description
+- [ ] track task
+  - [x] title
+  - [ ] ~~description~~
+  - [ ] comments
 - [ ] interact buttons
-  - [ ] start
+  - [x] start
   - [ ] end
 - [ ] report
   - [ ] start time
