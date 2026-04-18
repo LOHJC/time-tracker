@@ -13,6 +13,9 @@
   - [ ] database
   - [x] start time
   - [x] end time
+- [ ] bind to keyboard
+  - [ ] enter to start task
+  - [ ] ctrl + enter to add comment
 
 ## optional
 - camera tracking 
