@@ -9,26 +9,33 @@ const Status = Object.freeze({
 let current_progress = Status.IDLE;
 let current_task = "";
 let current_comments = [];
+let current_time_diff_string = "";
 
 // update the current time
-// TODO: this need to be optimize as even value unchange will call
+let last_second = -1;
 function updateCurrentTime() {
-    const now = new Date()
+    requestAnimationFrame(updateCurrentTime);
+
+    const now = new Date();
+    const current_second = now.getSeconds();
+
+    if (current_second === last_second) {
+        return;
+    }
+    last_second = current_second; // Don't forget to update this!
+
     const time_string = now.toLocaleTimeString();
     updateBigUITime(time_string);
 
-    // find the time difference
     if (current_progress == Status.TRACKING) {
-        const time_diff = now - start_time;
-        const time_diff_string = new Date(time_diff).toLocaleTimeString('en-GB', {
+        const time_diff = Math.round((now - start_time) / 1000) * 1000;
+        current_time_diff_string = new Date(time_diff).toLocaleTimeString('en-GB', {
             timeZone: 'UTC',
             hour12: false
         });
 
-        active_document.getElementById("big-ui-time-diff").innerText = time_diff_string;
+        active_document.getElementById("big-ui-time-diff").innerText = current_time_diff_string;
     }
-
-    requestAnimationFrame(updateCurrentTime);
 }
 updateCurrentTime();
 
@@ -170,18 +177,12 @@ function updateTaskDone() {
     end_time_col.textContent = end_time.toLocaleTimeString();
     title_col.textContent = current_task;
 
-
     const commentString = current_comments.map(item => {
         const time = item.time.toLocaleTimeString();
         return `${time} - ${item.comment}`; // "19:09:14 - something"
     }).join("\n");
     comments_col.textContent = commentString;
-
-    const time_diff_string = new Date(end_time - start_time).toLocaleTimeString('en-GB', {
-        timeZone: 'UTC',
-        hour12: false
-    });
-    time_diff_col.textContent = time_diff_string;
+    time_diff_col.textContent = current_time_diff_string;
 }
 
 // update comments
