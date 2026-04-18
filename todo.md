@@ -7,12 +7,12 @@
   - [ ] comments
 - [ ] interact buttons
   - [x] start
-  - [ ] end
+  - [x] end
   - [ ] add comment
 - [ ] report
   - [ ] database
-  - [ ] start time
-  - [ ] end time
+  - [x] start time
+  - [x] end time
 
 ## optional
 - camera tracking 

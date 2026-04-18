@@ -100,15 +100,14 @@ function updateBigUI() {
 
     // update the task
     if (current_progress == Status.TRACKING) {
-        document.getElementById("big-ui-task").hidden = true;
-        document.getElementById("big-ui-current-task").hidden = false;
-        current_task = document.getElementById("task-title").value;
+        active_document.getElementById("big-ui-task").hidden = true;
+        active_document.getElementById("big-ui-current-task").hidden = false;
+        current_task = active_document.getElementById("big-ui-task-title").value;
     }
     else if (current_progress == Status.IDLE) {
-        document.getElementById("big-ui-task").hidden = false;
-        document.getElementById("big-ui-current-task").hidden = true;
-        active_document.getElementById("big-ui-previous-task").innerText = current_task;
-        current_task = "";
+        active_document.getElementById("big-ui-task").hidden = false;
+        active_document.getElementById("big-ui-current-task").hidden = true;
+        active_document.getElementById("big-ui-time-diff").innerText = "00:00:00";
     }
     active_document.getElementById("big-ui-current-task").innerText = current_task;
 
@@ -117,19 +116,18 @@ function updateBigUI() {
     if (start_time != 0) {
         start_time_string = start_time.toLocaleTimeString();
     }
-    active_document.getElementById("big-ui-time-start").innerText = start_time_string;
 
     // update end time
     let end_time_string = ""
     if (end_time != 0) {
         end_time_string = end_time.toLocaleTimeString();
     }
-    active_document.getElementById("big-ui-time-end").innerText = end_time_string;
+
 }
 
 // start the task 
 document.getElementById("start-button").addEventListener("click", (event) => {
-    if (current_progress == Status.IDLE && document.getElementById("task-title").value) {
+    if (current_progress == Status.IDLE && active_document.getElementById("big-ui-task-title").value) {
         start_time = new Date();
         end_time = 0;
         current_progress = Status.TRACKING;
@@ -143,5 +141,28 @@ active_document.getElementById("big-ui-end-button").addEventListener("click", (e
         end_time = new Date();
         current_progress = Status.IDLE;
         updateBigUI();
+        updateTaskDone();
     }
 })
+
+// update the task done table
+function updateTaskDone() {
+    const table = document.getElementById("task-done-table");
+
+    const new_row = table.insertRow(-1);
+
+    const start_time_col = new_row.insertCell(0);
+    const end_time_col = new_row.insertCell(1);
+    const title_col = new_row.insertCell(2);
+    const comment_col = new_row.insertCell(3);
+    const time_diff_col = new_row.insertCell(4);
+
+    start_time_col.textContent = start_time.toLocaleTimeString();
+    end_time_col.textContent = end_time.toLocaleTimeString();
+    title_col.textContent = current_task;
+    const time_diff_string = new Date(end_time - start_time).toLocaleTimeString('en-GB', {
+        timeZone: 'UTC',
+        hour12: false
+    });
+    time_diff_col.textContent = time_diff_string;
+} 

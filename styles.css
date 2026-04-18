@@ -40,6 +40,21 @@ body {
     /* depends on the button height */
     min-height: 36px;
     align-content: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+#task-done-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 8px 0px;
+    background-color: #c8ceee;
+    overflow: hidden;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 button {
