@@ -6,7 +6,8 @@ const Status = Object.freeze({
     IDLE: Symbol("idle"),
     TRACKING: Symbol("tracking")
 });
-let current_progress = Status.IDLE
+let current_progress = Status.IDLE;
+let current_task = "";
 
 // update the current time
 // TODO: this need to be optimize as even value unchange will call
@@ -84,8 +85,9 @@ active_document.getElementById("pip").addEventListener("click", () => {
     openPip()
 })
 
-// big-ui change bg color
+// update big-ui
 function updateBigUI() {
+    // update bg color
     let bg_color = ""
     if (current_progress == Status.IDLE) {
         bg_color = "#f2ebcc"
@@ -94,23 +96,35 @@ function updateBigUI() {
     else if (current_progress == Status.TRACKING) {
         bg_color = "#c8ceee"
     }
-
     active_document.getElementById("big-ui").style.backgroundColor = bg_color;
 
-    active_document.getElementById("big-ui-task").innerText = document.getElementById("task-title").value;
-    if (start_time == 0) {
-        active_document.getElementById("big-ui-time-start").innerText = "";
+    // update the task
+    if (current_progress == Status.TRACKING) {
+        document.getElementById("big-ui-task").hidden = true;
+        document.getElementById("big-ui-current-task").hidden = false;
+        current_task = document.getElementById("task-title").value;
     }
-    else {
-        active_document.getElementById("big-ui-time-start").innerText = start_time.toLocaleTimeString();
+    else if (current_progress == Status.IDLE) {
+        document.getElementById("big-ui-task").hidden = false;
+        document.getElementById("big-ui-current-task").hidden = true;
+        active_document.getElementById("big-ui-previous-task").innerText = current_task;
+        current_task = "";
+    }
+    active_document.getElementById("big-ui-current-task").innerText = current_task;
 
+    // update start time
+    let start_time_string = "";
+    if (start_time != 0) {
+        start_time_string = start_time.toLocaleTimeString();
     }
-    if (end_time == 0) {
-        active_document.getElementById("big-ui-time-end").innerText = "";
+    active_document.getElementById("big-ui-time-start").innerText = start_time_string;
+
+    // update end time
+    let end_time_string = ""
+    if (end_time != 0) {
+        end_time_string = end_time.toLocaleTimeString();
     }
-    else {
-        active_document.getElementById("big-ui-time-end").innerText = end_time.toLocaleTimeString();
-    }
+    active_document.getElementById("big-ui-time-end").innerText = end_time_string;
 }
 
 // start the task 

@@ -14,26 +14,23 @@
 </head>
 
 <body>
-    <div id="task">
-        <label for="task-title">title: </label>
-        <input type="text" title="task-title" id="task-title">
-
-        <!-- <label for="task-description">description:</label>
-        <textarea title="task-description" id="task-description"></textarea> -->
-
-        <button id="start-button">start</button>
-    </div>
 
     <button id="pip">picture in picture</button>
 
     <div id="big-ui">
         <div id="big-ui-time"></div>
-        <div id="big-ui-task"></div>
+        <div id="big-ui-task">
+            <label for="task-title">title: </label>
+            <input type="text" title="task-title" id="task-title">
+            <button id="start-button">start</button>
+        </div>
+        <div id="big-ui-current-task" hidden></div>
         <div id="big-ui-time-range">
+            <div>previous task: <span id="big-ui-previous-task"></span></div>
             <div>start time: <span id="big-ui-time-start"></span></div>
             <div>end time: <span id="big-ui-time-end"></span></div>
+            <div>time diff: <span id="big-ui-time-diff"></span></div>
         </div>
-        <div id="big-ui-time-diff"></div>
         <button>add comment</button>
         <button id="big-ui-end-button">end</button>
     </div>

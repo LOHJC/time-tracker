@@ -35,32 +35,18 @@ body {
     font-weight: bold;
 }
 
-#big-ui-time-range {
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-}
-
-#task {
-    margin: 8px;
-    border-radius: 10px;
-    background-color:#c8ceee;
-    min-height: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+#big-ui-task,
+#big-ui-current-task {
+    /* depends on the button height */
+    min-height: 36px;
+    align-content: center;
 }
 
 button {
     all: unset;
-    cursor: pointer; 
+    cursor: pointer;
     background-color: #cde5d9;
     margin: 3px;
     padding: 5px 10px;
     border-radius: 10px;
-}
-
-input {
-    margin: 3px;
 }
