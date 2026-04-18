@@ -126,8 +126,10 @@ function updateBigUI() {
         active_document.getElementById("big-ui-end-button").hidden = true;
         active_document.getElementById("big-ui-add-comment-button").hidden = true;
 
-        current_time_diff_string = "00:00:00";
         current_task = "";
+        current_comments = [];
+        current_time_diff_string = "00:00:00";
+        
         active_document.getElementById("big-ui-task-title").value = current_task;
     }
     active_document.getElementById("big-ui-current-task").innerText = current_task;
