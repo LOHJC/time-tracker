@@ -4,7 +4,7 @@
 - [ ] track task
   - [x] title
   - [ ] ~~description~~
-  - [ ] comments
+  - [x] comments
 - [ ] interact buttons
   - [x] start
   - [x] end

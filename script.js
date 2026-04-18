@@ -8,6 +8,7 @@ const Status = Object.freeze({
 });
 let current_progress = Status.IDLE;
 let current_task = "";
+let current_comments = [];
 
 // update the current time
 // TODO: this need to be optimize as even value unchange will call
@@ -154,15 +155,37 @@ function updateTaskDone() {
     const start_time_col = new_row.insertCell(0);
     const end_time_col = new_row.insertCell(1);
     const title_col = new_row.insertCell(2);
-    const comment_col = new_row.insertCell(3);
+    const comments_col = new_row.insertCell(3);
     const time_diff_col = new_row.insertCell(4);
 
     start_time_col.textContent = start_time.toLocaleTimeString();
     end_time_col.textContent = end_time.toLocaleTimeString();
     title_col.textContent = current_task;
+
+
+    const commentString = current_comments.map(item => {
+        const time = item.time.toLocaleTimeString('en-GB', {
+            hour12: false
+        });
+        return `${time} - ${item.comment}`; // "19:09:14 - something"
+    }).join("\n");
+    comments_col.textContent = commentString;
+
     const time_diff_string = new Date(end_time - start_time).toLocaleTimeString('en-GB', {
         timeZone: 'UTC',
         hour12: false
     });
     time_diff_col.textContent = time_diff_string;
-} 
+}
+
+// update comments
+function updateComments() {
+    if (current_progress == Status.TRACKING) {
+        const now = new Date()
+        const time_string = now.toLocaleTimeString();
+        current_comments.push({ "time": now, "comment": "something" });
+    }
+}
+active_document.getElementById("big-ui-add-comment").addEventListener("click", (event) => {
+    updateComments()
+})
