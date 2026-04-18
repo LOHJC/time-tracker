@@ -8,7 +8,9 @@
 - [ ] interact buttons
   - [x] start
   - [ ] end
+  - [ ] add comment
 - [ ] report
+  - [ ] database
   - [ ] start time
   - [ ] end time
 

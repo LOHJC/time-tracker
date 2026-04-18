@@ -1,6 +1,7 @@
 
-let active_document = document
-let start_time = 0
+let active_document = document;
+let start_time = 0;
+let end_time = 0;
 const Status = Object.freeze({
     IDLE: Symbol("idle"),
     TRACKING: Symbol("tracking")
@@ -22,7 +23,7 @@ function updateCurrentTime() {
             hour12: false
         });
 
-        document.getElementById("big-ui-time-diff").innerText = time_diff_string;
+        active_document.getElementById("big-ui-time-diff").innerText = time_diff_string;
     }
 
     requestAnimationFrame(updateCurrentTime);
@@ -83,14 +84,50 @@ active_document.getElementById("pip").addEventListener("click", () => {
     openPip()
 })
 
-// start the record time 
-document.getElementById("start-button").addEventListener("click", (event) => {
-    if (current_progress == Status.IDLE && document.getElementById("task-title").value) {
-        const now = new Date();
-        start_time = now;
-        current_progress = Status.TRACKING;
-        active_document.getElementById("big-ui-time-start").innerText = now.toLocaleTimeString();
-        active_document.getElementById("big-ui-task").innerText = document.getElementById("task-title").value;
+// big-ui change bg color
+function updateBigUI() {
+    let bg_color = ""
+    if (current_progress == Status.IDLE) {
+        bg_color = "#f2ebcc"
     }
 
+    else if (current_progress == Status.TRACKING) {
+        bg_color = "#c8ceee"
+    }
+
+    active_document.getElementById("big-ui").style.backgroundColor = bg_color;
+
+    active_document.getElementById("big-ui-task").innerText = document.getElementById("task-title").value;
+    if (start_time == 0) {
+        active_document.getElementById("big-ui-time-start").innerText = "";
+    }
+    else {
+        active_document.getElementById("big-ui-time-start").innerText = start_time.toLocaleTimeString();
+
+    }
+    if (end_time == 0) {
+        active_document.getElementById("big-ui-time-end").innerText = "";
+    }
+    else {
+        active_document.getElementById("big-ui-time-end").innerText = end_time.toLocaleTimeString();
+    }
+}
+
+// start the task 
+document.getElementById("start-button").addEventListener("click", (event) => {
+    if (current_progress == Status.IDLE && document.getElementById("task-title").value) {
+        start_time = new Date();
+        end_time = 0;
+        current_progress = Status.TRACKING;
+        updateBigUI();
+    }
+})
+
+// end the task 
+active_document.getElementById("big-ui-end-button").addEventListener("click", (event) => {
+    if (current_progress == Status.TRACKING) {
+        end_time = new Date();
+        current_progress = Status.IDLE;
+        updateBigUI();
+    }
 })
