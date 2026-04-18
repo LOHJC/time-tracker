@@ -9,7 +9,8 @@ const Status = Object.freeze({
 let current_progress = Status.IDLE;
 let current_task = "";
 let current_comments = [];
-let current_time_diff_string = "";
+let current_time_string = ""
+let current_time_diff_string = "00:00:00";
 
 // update the current time
 let last_second = -1;
@@ -24,25 +25,29 @@ function updateCurrentTime() {
     }
     last_second = current_second; // Don't forget to update this!
 
-    const time_string = now.toLocaleTimeString();
-    updateBigUITime(time_string);
-
+    current_time_string = now.toLocaleTimeString();
     if (current_progress == Status.TRACKING) {
         const time_diff = Math.round((now - start_time) / 1000) * 1000;
         current_time_diff_string = new Date(time_diff).toLocaleTimeString('en-GB', {
             timeZone: 'UTC',
             hour12: false
         });
-
-        active_document.getElementById("big-ui-time-diff").innerText = current_time_diff_string;
     }
+    updateBigUITime();
 }
 updateCurrentTime();
 
 // show the time in big-ui
-function updateBigUITime(time_string) {
-    let big_ui_time = active_document.getElementById("big-ui-time");
-    big_ui_time.innerText = time_string;
+function updateBigUITime(big_time_string, small_time_string) {
+    if (current_progress == Status.IDLE) {
+        active_document.getElementById("big-ui-time").innerText = current_time_string;
+        active_document.getElementById("big-ui-small-time").innerText = current_time_diff_string;
+    }
+    else if (current_progress == Status.TRACKING) {
+        active_document.getElementById("big-ui-time").innerText = current_time_diff_string;
+        active_document.getElementById("big-ui-small-time").innerText = current_time_string;
+
+    }
 }
 
 // big-ui for picture in picture mode
@@ -121,7 +126,7 @@ function updateBigUI() {
         active_document.getElementById("big-ui-end-button").hidden = true;
         active_document.getElementById("big-ui-add-comment-button").hidden = true;
 
-        active_document.getElementById("big-ui-time-diff").innerText = "00:00:00";
+        current_time_diff_string = "00:00:00";
         current_task = "";
         active_document.getElementById("big-ui-task-title").value = current_task;
     }
@@ -138,6 +143,8 @@ function updateBigUI() {
     if (end_time != 0) {
         end_time_string = end_time.toLocaleTimeString();
     }
+
+    updateBigUITime();
 
 }
 

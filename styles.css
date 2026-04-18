@@ -85,7 +85,7 @@ button {
     transform: translate(0, -50%);
 
     border-radius: 10px;
-    background-color: #fcdce1;
+    background-color: #f2ebcc;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,6 +109,10 @@ button {
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
     align-items: center;
+}
+
+#big-ui-end-button {
+    background-color: #fcdce1;
 }
 
 [hidden] {
