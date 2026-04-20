@@ -32,6 +32,18 @@ body {
     position: relative;
 }
 
+#pip-message {
+    border-radius: 25px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fcdce1;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
 #big-ui-time {
     text-align: center;
     font-size: 3em;

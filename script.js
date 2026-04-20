@@ -53,6 +53,7 @@ function updateBigUITime(big_time_string, small_time_string) {
 // big-ui for picture in picture mode
 // ref: https://developer.chrome.com/docs/web-platform/document-picture-in-picture
 async function openPip() {
+
     const big_ui = active_document.getElementById("big-ui");
 
     // init window
@@ -86,12 +87,17 @@ async function openPip() {
     // show pip
     pip_window.document.body.append(big_ui);
 
+    document.getElementById("pip-message").hidden = false;
+
     // pip back to document when close
     pip_window.addEventListener("pagehide", (event) => {
         active_document = document;
         const container = active_document.getElementById("big-ui-container");
         const big_ui = event.target.querySelector("#big-ui");
         container.append(big_ui);
+
+
+        document.getElementById("pip-message").hidden = true;
     });
 }
 active_document.getElementById("pip").addEventListener("click", () => {
@@ -129,7 +135,7 @@ function updateBigUI() {
         current_task = "";
         current_comments = [];
         current_time_diff_string = "00:00:00";
-        
+
         active_document.getElementById("big-ui-task-title").value = current_task;
     }
     active_document.getElementById("big-ui-current-task").innerText = current_task;
