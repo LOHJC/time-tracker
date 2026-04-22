@@ -165,6 +165,17 @@ document.getElementById("start-button").addEventListener("click", (event) => {
         updateBigUI();
     }
 })
+document.getElementById("big-ui-task-title").addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        if (current_progress == Status.IDLE && active_document.getElementById("big-ui-task-title").value) {
+            start_time = new Date();
+            end_time = 0;
+            current_progress = Status.TRACKING;
+            updateBigUI();
+        }
+    }
+})
 
 // end the task 
 active_document.getElementById("big-ui-end-button").addEventListener("click", (event) => {
@@ -219,4 +230,12 @@ active_document.getElementById("big-ui-done-comment-button").addEventListener("c
     updateComments(active_document.getElementById("big-ui-comment-textarea").value);
     active_document.getElementById("big-ui-comment-textarea").value = "";
     active_document.getElementById("big-ui-comment-box").hidden = true;
+})
+active_document.getElementById("big-ui-comment-textarea").addEventListener("keydown", (event) => {
+    if (event.key == "Enter" && event.ctrlKey) {
+        event.preventDefault();
+        updateComments(active_document.getElementById("big-ui-comment-textarea").value);
+        active_document.getElementById("big-ui-comment-textarea").value = "";
+        active_document.getElementById("big-ui-comment-box").hidden = true;
+    }
 })
